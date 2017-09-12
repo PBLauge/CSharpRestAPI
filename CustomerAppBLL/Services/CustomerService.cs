@@ -34,7 +34,7 @@ namespace CustomerAppBLL.Services
             {
                 foreach (var customer in customers)
                 {
-                    var newCust = uow.CustomerRepository.Create(conv.Convert(customers));
+                    var newCust = uow.CustomerRepository.Create(conv.Convert(customer));
                     
                 }
                 uow.Complete();

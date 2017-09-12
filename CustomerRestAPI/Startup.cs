@@ -35,7 +35,7 @@ namespace CustomerRestAPI
             {
                 app.UseDeveloperExceptionPage();
                 var facade = new BLLFacade();
-                facade.CustomerService.Create(
+                var cust = facade.CustomerService.Create(
                     new CustomerBO()
                     {
                         FirstName = "Peder",
@@ -50,6 +50,18 @@ namespace CustomerRestAPI
                         LastName = "Cena",
                         Address = "PlayedOutMemeStreet"
                     });
+
+                for (int i = 0; i < 5000; i++)
+                {
+                    facade.OrderService.Create(
+                    new OrderBO()
+                    {
+                        DeliveryDate = DateTime.Now.AddMonths(1),
+                        OrderDate = DateTime.Now.AddMonths(-1),
+                        CustomerId = cust.Id
+                    });
+                }
+                
             }
 
             app.UseMvc();

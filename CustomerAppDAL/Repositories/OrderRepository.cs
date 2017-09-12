@@ -4,6 +4,7 @@ using System.Text;
 using CustomerAppDAL.Entities;
 using CustomerAppDAL.Context;
 using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace CustomerAppDAL.Repositories
 {
