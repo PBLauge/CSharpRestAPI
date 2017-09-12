@@ -31,16 +31,34 @@ namespace CustomerRestAPI.Controllers
         
         // POST: api/Customers
         [HttpPost]
-        public void Post([FromBody]CustomerBO cust)
+        public IActionResult Post([FromBody]CustomerBO cust)
         {
-            bLLFacade.CustomerService.Create(cust);
+            if (!ModelState.IsValid)
+            {
+                return StatusCode(406, ModelState);
+            }
+            return Ok(bLLFacade.CustomerService.Create(cust));
         }
         
         // PUT: api/Customers/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]CustomerBO cust)
+        public IActionResult Put(int id, [FromBody]CustomerBO cust)
         {
-            bLLFacade.CustomerService.Update(cust);
+            if (id != cust.Id)
+            {
+                return StatusCode(405, "Path Id does not match Customer Id.");
+            }
+
+            try
+            {
+                var customer = bLLFacade.CustomerService.Update(cust);
+                return Ok(customer);
+            }
+            catch (InvalidOperationException e)
+            {
+                return StatusCode(404, e.Message);
+            }
+            
         }
         
         // DELETE: api/ApiWithActions/5

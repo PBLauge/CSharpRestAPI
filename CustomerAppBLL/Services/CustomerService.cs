@@ -28,6 +28,19 @@ namespace CustomerAppBLL.Services
             }
         }
 
+        public void CreateAll(List<CustomerBO> customers)
+        {
+            using (var uow = facade.UnitOfWork)
+            {
+                foreach (var customer in customers)
+                {
+                    var newCust = uow.CustomerRepository.Create(conv.Convert(customers));
+                    
+                }
+                uow.Complete();
+            }
+        }
+
         public CustomerBO Delete(int Id)
         {
 			using (var uow = facade.UnitOfWork)
