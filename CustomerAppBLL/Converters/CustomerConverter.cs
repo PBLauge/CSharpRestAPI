@@ -1,10 +1,18 @@
 ﻿using CustomerAppBLL.BusinessObjects;
 using CustomerAppDAL.Entities;
+using System.Linq;
 
 namespace CustomerAppBLL.Converters
 {
     class CustomerConverter
     {
+
+        private AddressConverter aConv;
+
+        public CustomerConverter()
+        {
+            aConv = new AddressConverter();
+        }
 
         internal Customer Convert(CustomerBO cust)
         {
@@ -12,7 +20,11 @@ namespace CustomerAppBLL.Converters
             return new Customer()
             {
                 Id = cust.Id,
-                Address = cust.Address,
+                Addresses = cust.AddressIds?.Select(aId => new CustomerAddress()
+                {
+                    AddressId = aId,
+                    CustomerId = cust.Id
+                }).ToList(),
                 FirstName = cust.FirstName,
                 LastName = cust.LastName
             };
@@ -24,7 +36,7 @@ namespace CustomerAppBLL.Converters
             return new CustomerBO()
             {
                 Id = cust.Id,
-                Address = cust.Address,
+                AddressIds = cust.Addresses?.Select(a => a.AddressId).ToList(),
                 FirstName = cust.FirstName,
                 LastName = cust.LastName
             };

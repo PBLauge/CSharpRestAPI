@@ -35,12 +35,28 @@ namespace CustomerRestAPI
             {
                 app.UseDeveloperExceptionPage();
                 var facade = new BLLFacade();
+                /*
+                var address = facade.AddressService.Create(
+                    new AddressBO()
+                    {
+                        City = "Copenhagen",
+                        Street = "Played Out Meme Street",
+                        Number = "1337"
+                    });
+                var address2 = facade.AddressService.Create(
+                    new AddressBO()
+                    {
+                        City = "New York",
+                        Street = "Not Found Street",
+                        Number = "404"
+                    });
+
                 var cust = facade.CustomerService.Create(
                     new CustomerBO()
                     {
                         FirstName = "Peder",
                         LastName = "Laugesen",
-                        Address = "NopeStreet"
+                        AddressIds = new List<int>() { address2.Id}
                     });
 
                 facade.CustomerService.Create(
@@ -48,10 +64,10 @@ namespace CustomerRestAPI
                     {
                         FirstName = "John",
                         LastName = "Cena",
-                        Address = "PlayedOutMemeStreet"
+                        AddressIds = new List<int>() { address.Id }
                     });
 
-                for (int i = 0; i < 5000; i++)
+                for (int i = 0; i < 5; i++)
                 {
                     facade.OrderService.Create(
                     new OrderBO()
@@ -60,7 +76,7 @@ namespace CustomerRestAPI
                         OrderDate = DateTime.Now.AddMonths(-1),
                         CustomerId = cust.Id
                     });
-                }
+                }*/
                 
             }
 

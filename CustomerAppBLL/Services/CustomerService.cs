@@ -12,6 +12,7 @@ namespace CustomerAppBLL.Services
     class CustomerService : ICustomerService
     {
         CustomerConverter conv = new CustomerConverter();
+        AddressConverter aConv = new AddressConverter();
         DALFacade facade;
         public CustomerService(DALFacade facade)
         {
@@ -55,7 +56,16 @@ namespace CustomerAppBLL.Services
         {
             using (var uow = facade.UnitOfWork)
 			{
-				return conv.Convert(uow.CustomerRepository.Get(Id));
+                var cust = conv.Convert(uow.CustomerRepository.Get(Id));
+
+
+                //cust.Addresses = cust.AddressIds?.Select(id => aConv.Convert(uow.AddressRepository.Get(id))).ToList();
+
+                cust.Addresses = uow.AddressRepository.GetAllById(cust.AddressIds)
+                    .Select(a => aConv.Convert(a))
+                    .ToList();
+
+                return cust;
 			}
         }
 
@@ -79,9 +89,20 @@ namespace CustomerAppBLL.Services
 					throw new InvalidOperationException("Customer not found");
 				}
 
-				customerFromDb.FirstName = cust.FirstName;
-				customerFromDb.LastName = cust.LastName;
-				customerFromDb.Address = cust.Address;
+                var customerUpdated = conv.Convert(cust);
+				customerFromDb.FirstName = customerUpdated.FirstName;
+				customerFromDb.LastName = customerUpdated.LastName;
+                customerFromDb.Addresses.RemoveAll(ca => !customerUpdated.Addresses
+                .Exists(a => a.AddressId == ca.AddressId && a.CustomerId == ca.CustomerId));
+
+                customerUpdated.Addresses.RemoveAll(
+                    ca => customerFromDb.Addresses.Exists(
+                        a => a.AddressId == ca.AddressId &&
+                        a.CustomerId == ca.CustomerId));
+
+                customerFromDb.Addresses.AddRange(
+                    customerUpdated.Addresses);
+
                 uow.Complete();
 				return conv.Convert(customerFromDb);
             }

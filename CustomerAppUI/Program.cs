@@ -13,20 +13,20 @@ namespace CustomerAppUI
         /// <param name="args">dskdkslksd</param>
         static void Main(string[] args)
         {
-            var cust1 = new CustomerBO()
-            {
-                FirstName = "Bob",
-                LastName = "Dylan",
-                Address = "BongoStreet 202"
-            };
-            bllFacade.CustomerService.Create(cust1);
+            //var cust1 = new CustomerBO()
+            //{
+            //    FirstName = "Bob",
+            //    LastName = "Dylan",
+            //    Address = "BongoStreet 202"
+            //};
+            //bllFacade.CustomerService.Create(cust1);
 
-            bllFacade.CustomerService.Create(new CustomerBO()
-            {
-                FirstName = "Lars",
-                LastName = "Bilde",
-                Address = "Ostestrasse 202"
-            });
+            //bllFacade.CustomerService.Create(new CustomerBO()
+            //{
+            //    FirstName = "Lars",
+            //    LastName = "Bilde",
+            //    Address = "Ostestrasse 202"
+            //});
 
             string[] menuItems = {
                 "List All Customers",
@@ -79,7 +79,7 @@ namespace CustomerAppUI
                 Console.WriteLine("LastName: ");
                 customer.LastName = Console.ReadLine();
                 Console.WriteLine("Address: ");
-                customer.Address = Console.ReadLine();
+               // customer.Address = Console.ReadLine();
 				bllFacade.CustomerService.Update(customer);
 			}
             else
@@ -133,7 +133,7 @@ namespace CustomerAppUI
             {
                 FirstName = firstName,
                 LastName = lastName,
-                Address = address
+               // Address = address
             });
         }
 
@@ -142,8 +142,8 @@ namespace CustomerAppUI
             Console.WriteLine("\nList of Customers");
             foreach (var customer in bllFacade.CustomerService.GetAll())
             {
-                Console.WriteLine($"Id: {customer.Id} Name: {customer.FullName} " +
-                                $"Adress: {customer.Address}");
+                //Console.WriteLine($"Id: {customer.Id} Name: {customer.FullName} " +
+                //                $"Adress: {customer.Address}");
             }
             Console.WriteLine("\n");
 

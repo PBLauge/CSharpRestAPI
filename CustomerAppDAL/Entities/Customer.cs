@@ -15,5 +15,8 @@ namespace CustomerAppDAL.Entities
         public string Address { get; set; }
 
         public List<Order> Orders { get; set; }
+
+        public List<CustomerAddress> Addresses { get; set; }
+
     }
 }
