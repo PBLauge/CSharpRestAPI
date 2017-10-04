@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using CustomerAppDAL;
 using System.Linq;
-using CustomerAppDAL.Entities;
 using CustomerAppBLL.BusinessObjects;
 using CustomerAppBLL.Converters;
 

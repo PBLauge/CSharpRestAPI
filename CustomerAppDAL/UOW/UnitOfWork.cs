@@ -1,5 +1,4 @@
-﻿using System;
-using CustomerAppDAL.Context;
+﻿using CustomerAppDAL.Context;
 using CustomerAppDAL.Repositories;
 
 namespace CustomerAppDAL.UOW

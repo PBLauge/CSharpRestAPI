@@ -1,8 +1,5 @@
 ﻿using CustomerAppBLL.Services;
 using CustomerAppDAL;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CustomerAppBLL
 {

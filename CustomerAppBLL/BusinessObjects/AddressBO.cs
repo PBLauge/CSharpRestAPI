@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace CustomerAppBLL.BusinessObjects
 {
     public class AddressBO
