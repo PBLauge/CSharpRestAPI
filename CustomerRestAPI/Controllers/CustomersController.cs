@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
 using CustomerAppBLL;
 using CustomerAppBLL.BusinessObjects;
+using Microsoft.AspNetCore.Cors;
 
 namespace CustomerRestAPI.Controllers
 {
+    [EnableCors("MyPolicy")]
     [Produces("application/json")]
     [Route("api/[controller]")]
     public class CustomersController : Controller
